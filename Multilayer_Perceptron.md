@@ -36,6 +36,15 @@ for every layer, we need to store the prev_A, the W, the b, then the Z, so when 
 ### train/dev/test sets
 We often use the property:60:20:20, but if the data is too large, the test dataset and dev dataset's bigness will cause the waste of time of choosing hyper parameter
 ### Bias and Variance
+introduction: generalization error can be three part:
+bias, variance, noise(irreducible error)
+* bias: the instance between the value and true value
+* variance: dispersion
+![](variance_bias.png)
+![](1.png)
+![](2.png)
+![](32.png)
+![](5.png)
 ### Tell the problem
 To tell if a model is high bias or high variance, we depend on the train error and dev error. But we also need a base error to compare with the train and test error.
 ### Basic recipe for the problem
@@ -127,7 +136,35 @@ note:
 * remember regularization(don't forget the L when using it)
 * doesn't work with dropout
 * Run at random initialization; maybe the algorithm is correct only when W and b is near to 0.
-* 
+
+### optimization algorithms
+#### Exponentially weighted average
+V(t) = beta * V(t - 1) + (1 - beta) * theta(t)  [beta is recommended to be 0.9]
+
+bias correction: V(t)/(1 - beta ^ t)
+#### momentum and RMSprop and Adam
+momentum
+
+V(dw) = beta * V(dw) + (1 - beta) * dw
+
+V(db) = beta * V(db) + (1 - beta) * db
+
+w = w - alpha * V(dw), b = b - alpha * V(db)
+
+RMSprop
+
+S(dw) = beta * S(dw) + (1 - beta) * (dw) ^ 2
+
+S(db) = beta * S(db) + (1 - beta) * (db) ^ 2
+
+w = w - alpha * dw/S(dw)^1/2 
+
+b = b - alpha * db/S(db)^1/2
+
+Adam
+
+![](10.png)
+
 
 
 
